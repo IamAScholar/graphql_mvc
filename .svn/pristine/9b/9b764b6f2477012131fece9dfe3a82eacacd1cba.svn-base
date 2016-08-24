@@ -1,0 +1,12 @@
+package com.springmvc.dao;
+
+import java.util.List;
+
+import com.springmvc.model.Sql;
+
+public interface SqlDAO {
+	
+	List<Sql> selectSqls();
+	List<Sql> selectErrorSqls();
+	void update(Sql sql);
+}

@@ -1,0 +1,66 @@
+package com.springmvc.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.springmvc.model.Sql;
+import com.springmvc.service.SqlService;
+
+@Controller
+@RequestMapping("/")
+public class SqlController {
+	@Autowired
+	private SqlService sqlService ;
+	@RequestMapping("showSqls")
+	public String showSql(Model model,HttpServletRequest request){
+		List<Sql> listSqls=sqlService.selectSqls();
+		List<Sql> subSqls=new ArrayList<Sql>();
+		int st=1;
+		String start=request.getParameter("start");
+		if(null!=start)
+			st=Integer.parseInt(start);
+		int slen=(st-1)*10;
+		model.addAttribute("count",listSqls.size());
+		model.addAttribute("start",st);
+		model.addAttribute("sindex", slen);
+		subSqls=listSqls.subList(slen,slen+10>listSqls.size()?listSqls.size():slen+10);
+		model.addAttribute("ListSqls",subSqls);
+		return "showSqls";
+	}
+	@RequestMapping("showErrorSqls")
+	public String showErrorSqls(Model model,HttpServletRequest request){
+		List<Sql> listSqls=sqlService.selectErrorSqls();
+		List<Sql> subSqls=new ArrayList<Sql>();
+		int st=1;
+		String start=request.getParameter("start");
+		if(null!=start)
+			st=Integer.parseInt(start);
+		int slen=(st-1)*10;
+		model.addAttribute("count",listSqls.size());
+		model.addAttribute("start",st);
+		model.addAttribute("sindex", slen);
+		subSqls=listSqls.subList(slen,slen+10>listSqls.size()?listSqls.size():slen+10);
+		model.addAttribute("ListSqls",subSqls);
+		return "showErrorSqls";
+	}
+	@RequestMapping("update")
+	public void update(HttpServletRequest request){
+		int id=Integer.parseInt(request.getParameter("sql_id"));
+		String exe_sql=request.getParameter("exe_sql");
+		Sql sql=new Sql();
+		sql.setExe_sql(exe_sql);
+		sql.setId(id);
+		System.out.println(exe_sql);
+		sqlService.update(sql);
+	}
+
+
+
+}

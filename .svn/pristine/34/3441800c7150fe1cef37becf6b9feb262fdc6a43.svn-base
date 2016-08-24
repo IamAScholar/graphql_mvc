@@ -1,0 +1,34 @@
+package com.springmvc.service.iml;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springmvc.dao.SqlDAO;
+import com.springmvc.model.Sql;
+import com.springmvc.service.SqlService;
+
+@Service
+public class SqlServiceImpl implements SqlService {
+	@Autowired
+	private SqlDAO sqlDAO;
+
+	@Override
+	public List<Sql> selectSqls() {	
+		return sqlDAO.selectSqls();
+	}
+
+	@Override
+	public void update(Sql sql) {
+		sqlDAO.update(sql);
+		
+	}
+
+	@Override
+	public List<Sql> selectErrorSqls() {
+	
+		return sqlDAO.selectErrorSqls();
+	}
+
+}

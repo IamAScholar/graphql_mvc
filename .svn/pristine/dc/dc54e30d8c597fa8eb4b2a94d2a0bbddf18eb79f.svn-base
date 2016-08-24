@@ -1,0 +1,47 @@
+package com.springmvc.model;
+
+public class ErrorSql {
+	private int exe_id;
+	private String exe_sql;
+	private String exe_time;
+	private String instruction;
+	private String exception;
+	private String sql_day;
+	public int getExe_id() {
+		return exe_id;
+	}
+	public void setExe_id(int exe_id) {
+		this.exe_id = exe_id;
+	}
+	public String getExe_sql() {
+		return exe_sql;
+	}
+	public void setExe_sql(String exe_sql) {
+		this.exe_sql = exe_sql;
+	}
+	public String getExe_time() {
+		return exe_time;
+	}
+	public void setExe_time(String exe_time) {
+		this.exe_time = exe_time;
+	}
+	public String getInstruction() {
+		return instruction;
+	}
+	public void setInstruction(String instruction) {
+		this.instruction = instruction;
+	}
+	public String getException() {
+		return exception;
+	}
+	public void setException(String exception) {
+		this.exception = exception;
+	}
+	public String getSql_day() {
+		return sql_day;
+	}
+	public void setSql_day(String sql_day) {
+		this.sql_day = sql_day;
+	}
+
+}

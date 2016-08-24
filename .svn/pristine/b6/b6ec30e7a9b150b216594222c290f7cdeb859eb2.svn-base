@@ -1,0 +1,4 @@
+jdbc_driverClassName=com.mysql.jdbc.Driver
+jdbc_url=jdbc:mysql://10.3.0.50:3306/result_test?useUnicode=true&amp;characterEncoding=utf-8
+jdbc_username=tuyoo
+jdbc_password=tuyougame

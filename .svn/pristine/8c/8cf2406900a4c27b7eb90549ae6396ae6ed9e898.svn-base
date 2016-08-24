@@ -1,0 +1,34 @@
+package com.springmvc.model;
+
+public class Sql {
+	private int id;
+	private String exe_sql;
+	private String is_running;
+	private String instruction;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getExe_sql() {
+		return exe_sql;
+	}
+	public void setExe_sql(String exe_sql) {
+		this.exe_sql = exe_sql;
+	}
+	public String getIs_running() {
+		return is_running;
+	}
+	public void setIs_running(int is_running) {
+		this.is_running = is_running==0?"no_running":"running";
+	}
+	public String getInstruction() {
+		return instruction;
+	}
+	public void setInstruction(String instruction) {
+		this.instruction = instruction;
+	}
+	
+
+}

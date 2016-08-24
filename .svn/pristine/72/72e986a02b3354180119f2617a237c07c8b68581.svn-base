@@ -1,0 +1,12 @@
+package com.springmvc.service;
+
+import java.util.List;
+
+import com.springmvc.model.Sql;
+
+public interface SqlService {
+
+	void update(Sql sql);
+	List<Sql> selectSqls();
+	List<Sql> selectErrorSqls();
+}

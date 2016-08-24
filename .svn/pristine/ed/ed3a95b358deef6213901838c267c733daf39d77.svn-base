@@ -1,0 +1,99 @@
+package com.springmvc.controller;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.springmvc.util.Util;
+
+@Controller
+@RequestMapping("/")
+public class ExeController {
+
+	@RequestMapping("exeAgineServlet")
+	public void exe(HttpServletRequest request) {
+
+		String id = request.getParameter("sql_id");
+		String startTime = request.getParameter("start_time");
+		String interval = request.getParameter("interval");
+		oneIdExe(id,startTime,interval);
+	}
+	
+	@RequestMapping("manySqlsExe")
+	public void manySqlsExe(HttpServletRequest request){
+		String idString=request.getParameter("sqlIdList");
+		String[] idList=idString.trim().split(",");
+		String startTime = request.getParameter("start_time");
+		String interval = request.getParameter("interval");
+		for(String id:idList){
+			oneIdExe(id,startTime,interval);
+		}
+	}
+	
+	@RequestMapping("errorSqlsExe")
+	public void errorSqlsExe(){
+		Runtime r = Runtime.getRuntime();
+		try {
+			exe(r,"-2","hello",0);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	private void oneIdExe(String id,String startTime,String interval){
+		int iv = Integer.parseInt(interval);
+		Runtime r = Runtime.getRuntime();
+		// int rs=0;
+		// List<String> values= new ArrayList<String>();
+		// values.add(id);
+		// values.add(startTime);
+
+		System.out.println("id:" + id);
+		System.out.println("startTime:" + startTime);
+		System.out.println("interval:" + interval);
+		try {
+			for (int i = 1; i <= iv; i++) {
+				String end = Util.getDate("2016-05-31", startTime, i);
+				if (end.equals("end"))
+					break;
+				System.out.println(end);
+			   exe(r,id,end,i);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private void exe(Runtime r,String id ,String end,int i) throws IOException, InterruptedException{
+		String lCommand = null;
+		Properties prop = System.getProperties();
+		String os = prop.getProperty("os.name");
+		System.out.println(os);
+		if (os.trim().equals("Windows 7")) {
+			lCommand = "java -jar C:/Users/Administrator/Desktop/exeSql.jar com.tuyoo.main.Exe " + id + " "
+					+ end;
+		} else {
+			lCommand = "java -jar /home/lizhongyang/exeSql/exeSql.jar com.tuyoo.main.Exe " + id + " " + end;
+		}
+		Process p = r.exec(lCommand);// 启动另一个进程来执行命令
+		BufferedInputStream in = new BufferedInputStream(p.getInputStream());
+		BufferedReader inBr = new BufferedReader(new InputStreamReader(in));
+		String lineStr;
+		while ((lineStr = inBr.readLine()) != null)
+			// 获得命令执行后在控制台的输出信息
+			System.out.println(lineStr);// 打印输出信息
+		// 检查命令是否执行失败。
+		if (p.waitFor() != 0) {
+			if (p.exitValue() == 1)// p.exitValue()==0表示正常结束，1：非正常结束
+				System.err.println("命令执行失败!");
+		}
+		inBr.close();
+		in.close();
+	}
+
+}

@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmvc.dao.CbObjectsDaoMapper">
+  <resultMap id="BaseResultMap" type="com.springmvc.model.CbObjectsDao">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="entity_type" jdbcType="VARCHAR" property="entityType" />
+    <result column="entity_id" jdbcType="BIGINT" property="entityId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="normalized_name" jdbcType="VARCHAR" property="normalizedName" />
+    <result column="permalink" jdbcType="VARCHAR" property="permalink" />
+    <result column="category_code" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="founded_at" jdbcType="DATE" property="foundedAt" />
+    <result column="closed_at" jdbcType="DATE" property="closedAt" />
+    <result column="domain" jdbcType="VARCHAR" property="domain" />
+    <result column="homepage_url" jdbcType="VARCHAR" property="homepageUrl" />
+    <result column="twitter_username" jdbcType="VARCHAR" property="twitterUsername" />
+    <result column="logo_url" jdbcType="VARCHAR" property="logoUrl" />
+    <result column="logo_width" jdbcType="INTEGER" property="logoWidth" />
+    <result column="logo_height" jdbcType="INTEGER" property="logoHeight" />
+    <result column="short_description" jdbcType="VARCHAR" property="shortDescription" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="tag_list" jdbcType="VARCHAR" property="tagList" />
+    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
+    <result column="state_code" jdbcType="VARCHAR" property="stateCode" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="first_investment_at" jdbcType="DATE" property="firstInvestmentAt" />
+    <result column="last_investment_at" jdbcType="DATE" property="lastInvestmentAt" />
+    <result column="investment_rounds" jdbcType="INTEGER" property="investmentRounds" />
+    <result column="invested_companies" jdbcType="INTEGER" property="investedCompanies" />
+    <result column="first_funding_at" jdbcType="DATE" property="firstFundingAt" />
+    <result column="last_funding_at" jdbcType="DATE" property="lastFundingAt" />
+    <result column="funding_rounds" jdbcType="INTEGER" property="fundingRounds" />
+    <result column="funding_total_usd" jdbcType="DECIMAL" property="fundingTotalUsd" />
+    <result column="first_milestone_at" jdbcType="DATE" property="firstMilestoneAt" />
+    <result column="last_milestone_at" jdbcType="DATE" property="lastMilestoneAt" />
+    <result column="milestones" jdbcType="INTEGER" property="milestones" />
+    <result column="relationships" jdbcType="INTEGER" property="relationships" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.springmvc.model.CbObjectsDao">
+    <result column="overview" jdbcType="LONGVARCHAR" property="overview" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, entity_type, entity_id, parent_id, name, normalized_name, permalink, category_code, 
+    status, founded_at, closed_at, domain, homepage_url, twitter_username, logo_url, 
+    logo_width, logo_height, short_description, description, tag_list, country_code, 
+    state_code, city, region, first_investment_at, last_investment_at, investment_rounds, 
+    invested_companies, first_funding_at, last_funding_at, funding_rounds, funding_total_usd, 
+    first_milestone_at, last_milestone_at, milestones, relationships, created_by, created_at, 
+    updated_at
+  </sql>
+  <sql id="Blob_Column_List">
+    overview
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cb_objects
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cb_objects
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.springmvc.model.CbObjectsDao">
+    insert into cb_objects (id, entity_type, entity_id, 
+      parent_id, name, normalized_name, 
+      permalink, category_code, status, 
+      founded_at, closed_at, domain, 
+      homepage_url, twitter_username, logo_url, 
+      logo_width, logo_height, short_description, 
+      description, tag_list, country_code, 
+      state_code, city, region, 
+      first_investment_at, last_investment_at, investment_rounds, 
+      invested_companies, first_funding_at, last_funding_at, 
+      funding_rounds, funding_total_usd, first_milestone_at, 
+      last_milestone_at, milestones, relationships, 
+      created_by, created_at, updated_at, 
+      overview)
+    values (#{id,jdbcType=VARCHAR}, #{entityType,jdbcType=VARCHAR}, #{entityId,jdbcType=BIGINT}, 
+      #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{normalizedName,jdbcType=VARCHAR}, 
+      #{permalink,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{foundedAt,jdbcType=DATE}, #{closedAt,jdbcType=DATE}, #{domain,jdbcType=VARCHAR}, 
+      #{homepageUrl,jdbcType=VARCHAR}, #{twitterUsername,jdbcType=VARCHAR}, #{logoUrl,jdbcType=VARCHAR}, 
+      #{logoWidth,jdbcType=INTEGER}, #{logoHeight,jdbcType=INTEGER}, #{shortDescription,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{tagList,jdbcType=VARCHAR}, #{countryCode,jdbcType=VARCHAR}, 
+      #{stateCode,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{firstInvestmentAt,jdbcType=DATE}, #{lastInvestmentAt,jdbcType=DATE}, #{investmentRounds,jdbcType=INTEGER}, 
+      #{investedCompanies,jdbcType=INTEGER}, #{firstFundingAt,jdbcType=DATE}, #{lastFundingAt,jdbcType=DATE}, 
+      #{fundingRounds,jdbcType=INTEGER}, #{fundingTotalUsd,jdbcType=DECIMAL}, #{firstMilestoneAt,jdbcType=DATE}, 
+      #{lastMilestoneAt,jdbcType=DATE}, #{milestones,jdbcType=INTEGER}, #{relationships,jdbcType=INTEGER}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{overview,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springmvc.model.CbObjectsDao">
+    insert into cb_objects
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="entityType != null">
+        entity_type,
+      </if>
+      <if test="entityId != null">
+        entity_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="normalizedName != null">
+        normalized_name,
+      </if>
+      <if test="permalink != null">
+        permalink,
+      </if>
+      <if test="categoryCode != null">
+        category_code,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="foundedAt != null">
+        founded_at,
+      </if>
+      <if test="closedAt != null">
+        closed_at,
+      </if>
+      <if test="domain != null">
+        domain,
+      </if>
+      <if test="homepageUrl != null">
+        homepage_url,
+      </if>
+      <if test="twitterUsername != null">
+        twitter_username,
+      </if>
+      <if test="logoUrl != null">
+        logo_url,
+      </if>
+      <if test="logoWidth != null">
+        logo_width,
+      </if>
+      <if test="logoHeight != null">
+        logo_height,
+      </if>
+      <if test="shortDescription != null">
+        short_description,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="tagList != null">
+        tag_list,
+      </if>
+      <if test="countryCode != null">
+        country_code,
+      </if>
+      <if test="stateCode != null">
+        state_code,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="firstInvestmentAt != null">
+        first_investment_at,
+      </if>
+      <if test="lastInvestmentAt != null">
+        last_investment_at,
+      </if>
+      <if test="investmentRounds != null">
+        investment_rounds,
+      </if>
+      <if test="investedCompanies != null">
+        invested_companies,
+      </if>
+      <if test="firstFundingAt != null">
+        first_funding_at,
+      </if>
+      <if test="lastFundingAt != null">
+        last_funding_at,
+      </if>
+      <if test="fundingRounds != null">
+        funding_rounds,
+      </if>
+      <if test="fundingTotalUsd != null">
+        funding_total_usd,
+      </if>
+      <if test="firstMilestoneAt != null">
+        first_milestone_at,
+      </if>
+      <if test="lastMilestoneAt != null">
+        last_milestone_at,
+      </if>
+      <if test="milestones != null">
+        milestones,
+      </if>
+      <if test="relationships != null">
+        relationships,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="overview != null">
+        overview,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="entityType != null">
+        #{entityType,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null">
+        #{entityId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="normalizedName != null">
+        #{normalizedName,jdbcType=VARCHAR},
+      </if>
+      <if test="permalink != null">
+        #{permalink,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="foundedAt != null">
+        #{foundedAt,jdbcType=DATE},
+      </if>
+      <if test="closedAt != null">
+        #{closedAt,jdbcType=DATE},
+      </if>
+      <if test="domain != null">
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="homepageUrl != null">
+        #{homepageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterUsername != null">
+        #{twitterUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logoWidth != null">
+        #{logoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="logoHeight != null">
+        #{logoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="shortDescription != null">
+        #{shortDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="tagList != null">
+        #{tagList,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stateCode != null">
+        #{stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="firstInvestmentAt != null">
+        #{firstInvestmentAt,jdbcType=DATE},
+      </if>
+      <if test="lastInvestmentAt != null">
+        #{lastInvestmentAt,jdbcType=DATE},
+      </if>
+      <if test="investmentRounds != null">
+        #{investmentRounds,jdbcType=INTEGER},
+      </if>
+      <if test="investedCompanies != null">
+        #{investedCompanies,jdbcType=INTEGER},
+      </if>
+      <if test="firstFundingAt != null">
+        #{firstFundingAt,jdbcType=DATE},
+      </if>
+      <if test="lastFundingAt != null">
+        #{lastFundingAt,jdbcType=DATE},
+      </if>
+      <if test="fundingRounds != null">
+        #{fundingRounds,jdbcType=INTEGER},
+      </if>
+      <if test="fundingTotalUsd != null">
+        #{fundingTotalUsd,jdbcType=DECIMAL},
+      </if>
+      <if test="firstMilestoneAt != null">
+        #{firstMilestoneAt,jdbcType=DATE},
+      </if>
+      <if test="lastMilestoneAt != null">
+        #{lastMilestoneAt,jdbcType=DATE},
+      </if>
+      <if test="milestones != null">
+        #{milestones,jdbcType=INTEGER},
+      </if>
+      <if test="relationships != null">
+        #{relationships,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overview != null">
+        #{overview,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springmvc.model.CbObjectsDao">
+    update cb_objects
+    <set>
+      <if test="entityType != null">
+        entity_type = #{entityType,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null">
+        entity_id = #{entityId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="normalizedName != null">
+        normalized_name = #{normalizedName,jdbcType=VARCHAR},
+      </if>
+      <if test="permalink != null">
+        permalink = #{permalink,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        category_code = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="foundedAt != null">
+        founded_at = #{foundedAt,jdbcType=DATE},
+      </if>
+      <if test="closedAt != null">
+        closed_at = #{closedAt,jdbcType=DATE},
+      </if>
+      <if test="domain != null">
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="homepageUrl != null">
+        homepage_url = #{homepageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterUsername != null">
+        twitter_username = #{twitterUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logoWidth != null">
+        logo_width = #{logoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="logoHeight != null">
+        logo_height = #{logoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="shortDescription != null">
+        short_description = #{shortDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="tagList != null">
+        tag_list = #{tagList,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        country_code = #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stateCode != null">
+        state_code = #{stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="firstInvestmentAt != null">
+        first_investment_at = #{firstInvestmentAt,jdbcType=DATE},
+      </if>
+      <if test="lastInvestmentAt != null">
+        last_investment_at = #{lastInvestmentAt,jdbcType=DATE},
+      </if>
+      <if test="investmentRounds != null">
+        investment_rounds = #{investmentRounds,jdbcType=INTEGER},
+      </if>
+      <if test="investedCompanies != null">
+        invested_companies = #{investedCompanies,jdbcType=INTEGER},
+      </if>
+      <if test="firstFundingAt != null">
+        first_funding_at = #{firstFundingAt,jdbcType=DATE},
+      </if>
+      <if test="lastFundingAt != null">
+        last_funding_at = #{lastFundingAt,jdbcType=DATE},
+      </if>
+      <if test="fundingRounds != null">
+        funding_rounds = #{fundingRounds,jdbcType=INTEGER},
+      </if>
+      <if test="fundingTotalUsd != null">
+        funding_total_usd = #{fundingTotalUsd,jdbcType=DECIMAL},
+      </if>
+      <if test="firstMilestoneAt != null">
+        first_milestone_at = #{firstMilestoneAt,jdbcType=DATE},
+      </if>
+      <if test="lastMilestoneAt != null">
+        last_milestone_at = #{lastMilestoneAt,jdbcType=DATE},
+      </if>
+      <if test="milestones != null">
+        milestones = #{milestones,jdbcType=INTEGER},
+      </if>
+      <if test="relationships != null">
+        relationships = #{relationships,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overview != null">
+        overview = #{overview,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.springmvc.model.CbObjectsDao">
+    update cb_objects
+    set entity_type = #{entityType,jdbcType=VARCHAR},
+      entity_id = #{entityId,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      normalized_name = #{normalizedName,jdbcType=VARCHAR},
+      permalink = #{permalink,jdbcType=VARCHAR},
+      category_code = #{categoryCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      founded_at = #{foundedAt,jdbcType=DATE},
+      closed_at = #{closedAt,jdbcType=DATE},
+      domain = #{domain,jdbcType=VARCHAR},
+      homepage_url = #{homepageUrl,jdbcType=VARCHAR},
+      twitter_username = #{twitterUsername,jdbcType=VARCHAR},
+      logo_url = #{logoUrl,jdbcType=VARCHAR},
+      logo_width = #{logoWidth,jdbcType=INTEGER},
+      logo_height = #{logoHeight,jdbcType=INTEGER},
+      short_description = #{shortDescription,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      tag_list = #{tagList,jdbcType=VARCHAR},
+      country_code = #{countryCode,jdbcType=VARCHAR},
+      state_code = #{stateCode,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      first_investment_at = #{firstInvestmentAt,jdbcType=DATE},
+      last_investment_at = #{lastInvestmentAt,jdbcType=DATE},
+      investment_rounds = #{investmentRounds,jdbcType=INTEGER},
+      invested_companies = #{investedCompanies,jdbcType=INTEGER},
+      first_funding_at = #{firstFundingAt,jdbcType=DATE},
+      last_funding_at = #{lastFundingAt,jdbcType=DATE},
+      funding_rounds = #{fundingRounds,jdbcType=INTEGER},
+      funding_total_usd = #{fundingTotalUsd,jdbcType=DECIMAL},
+      first_milestone_at = #{firstMilestoneAt,jdbcType=DATE},
+      last_milestone_at = #{lastMilestoneAt,jdbcType=DATE},
+      milestones = #{milestones,jdbcType=INTEGER},
+      relationships = #{relationships,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      overview = #{overview,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springmvc.model.CbObjectsDao">
+    update cb_objects
+    set entity_type = #{entityType,jdbcType=VARCHAR},
+      entity_id = #{entityId,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      normalized_name = #{normalizedName,jdbcType=VARCHAR},
+      permalink = #{permalink,jdbcType=VARCHAR},
+      category_code = #{categoryCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      founded_at = #{foundedAt,jdbcType=DATE},
+      closed_at = #{closedAt,jdbcType=DATE},
+      domain = #{domain,jdbcType=VARCHAR},
+      homepage_url = #{homepageUrl,jdbcType=VARCHAR},
+      twitter_username = #{twitterUsername,jdbcType=VARCHAR},
+      logo_url = #{logoUrl,jdbcType=VARCHAR},
+      logo_width = #{logoWidth,jdbcType=INTEGER},
+      logo_height = #{logoHeight,jdbcType=INTEGER},
+      short_description = #{shortDescription,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      tag_list = #{tagList,jdbcType=VARCHAR},
+      country_code = #{countryCode,jdbcType=VARCHAR},
+      state_code = #{stateCode,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      first_investment_at = #{firstInvestmentAt,jdbcType=DATE},
+      last_investment_at = #{lastInvestmentAt,jdbcType=DATE},
+      investment_rounds = #{investmentRounds,jdbcType=INTEGER},
+      invested_companies = #{investedCompanies,jdbcType=INTEGER},
+      first_funding_at = #{firstFundingAt,jdbcType=DATE},
+      last_funding_at = #{lastFundingAt,jdbcType=DATE},
+      funding_rounds = #{fundingRounds,jdbcType=INTEGER},
+      funding_total_usd = #{fundingTotalUsd,jdbcType=DECIMAL},
+      first_milestone_at = #{firstMilestoneAt,jdbcType=DATE},
+      last_milestone_at = #{lastMilestoneAt,jdbcType=DATE},
+      milestones = #{milestones,jdbcType=INTEGER},
+      relationships = #{relationships,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

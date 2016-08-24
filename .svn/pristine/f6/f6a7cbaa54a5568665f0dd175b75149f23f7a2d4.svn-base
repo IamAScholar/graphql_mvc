@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmvc.dao.SqlDAO">
+
+	<resultMap type="com.springmvc.model.Sql" id="resultSqls">
+		<id column="id" property="id" />
+		<result column="exe_ql" property="exe_sql" />
+		<result column="is_running" property="is_running" />
+		<result column="instruction" property="instruction" />
+	</resultMap>
+	<resultMap type="com.springmvc.model.ErrorSql" id="resultErrorSqls">
+		<id column="exe_id" property="exe_id" />
+		<result column="exe_sql" property="exe_sql" />
+		<result column="exception" property="exception" />
+		<result column="exe_time" property="exe_time" />
+		<result column="sql_day" property="sql_day" />
+		<result column="instruction" property="instruction" />
+	</resultMap>
+
+	<select id="selectSqls" resultMap="resultSqls">
+		select id,exe_sql,is_running,instruction from hive_sql_test order by id
+	</select>
+    <update id="update" parameterType="com.springmvc.model.Sql">  
+        UPDATE result_test.hive_sql_test SET exe_sql =#{exe_sql} WHERE id=#{id}
+    </update>  
+    <select id="selectErrorSqls" resultMap="resultErrorSqls">
+    select a.exe_id exe_id,b.exe_sql exe_sql,a.exception exception,a.exe_time exe_time,b.instruction instruction,sql_day from result_test.sql_exe_moni a left join  result_test.hive_sql_test b on  a.exe_id=b.id order by a.exe_id
+    </select>
+</mapper>     

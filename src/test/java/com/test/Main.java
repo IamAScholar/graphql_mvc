@@ -54,7 +54,6 @@ private GraphQLSchema schema;
 	                .type(obType)
 	                .dataFetcher(environment -> {
 	                    // 获取查询参数
-	                	System.out.println("ddd");
 	                    String id = environment.getArgument("id");
 	                    return userService.selectByPrimaryKey(id);
 	                	//return null;
@@ -77,7 +76,7 @@ private GraphQLSchema schema;
 //			System.out.println(d.getName());
 //		}
 		
-		String query2 = "{user(\"c:1\") {id,name} }";
+		String query2 = "{user (id:\"c:1\") {id,name} }";
 		 Map<String, Object> result1 = (Map<String, Object>) new GraphQL(schema).execute(query2).getData();
 		 System.out.println(result1);
 		  
